@@ -5,21 +5,21 @@ Java-Agent, der sich per Portable Interceptor in bestehende CORBA-Anwendungen ei
 ## Architektur
 
 ```
-┌─────────────────────┐         ┌─────────────────────┐
-│  Deine CORBA App    │         │  CORBA Monitor API   │
-│                     │  HTTP   │  (Laravel)           │
-│  ┌───────────────┐  │ ──────> │                      │
-│  │ Client        │  │  JSON   │  POST /api/traffic   │
-│  │ Interceptor   │  │         │  POST /api/traffic/  │
-│  ├───────────────┤  │         │       batch          │
-│  │ Server        │  │         │  POST /api/nameserver│
-│  │ Interceptor   │  │         │       /scan          │
-│  ├───────────────┤  │         └─────────┬────────────┘
-│  │ Nameserver    │  │                   │
-│  │ Scanner       │  │                   ▼
+┌─────────────────────┐         ┌─────────────────────────────────┐
+│  Deine CORBA App    │         │  CORBA Monitor API              │
+│                     │  HTTP   │  (Laravel)                      │
+│  ┌───────────────┐  │ ──────> │                                 │
+│  │ Client        │  │  JSON   │  POST /api/traffic              │
+│  │ Interceptor   │  │         │  POST /api/traffic/batch        │
+│  ├───────────────┤  │         │  POST /api/nameserver/scan      │
+│  │ Server        │  │         │                                 │
+│  │ Interceptor   │  │         │                                 │
+│  ├───────────────┤  │         └────────────┬────────────────────┘
+│  │ Nameserver    │  │                      │
+│  │ Scanner       │  │                      ▼
 │  └───────────────┘  │         ┌─────────────────────┐
-│         │           │         │  Dashboard           │
-│         ▼           │         │  (Livewire/Flux UI)  │
+│         │           │         │  Dashboard          │
+│         ▼           │         │  (Livewire/Flux UI) │
 │  ┌───────────────┐  │         └─────────────────────┘
 │  │ CORBA         │  │
 │  │ Nameserver    │  │

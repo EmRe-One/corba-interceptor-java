@@ -1,0 +1,39 @@
+// VehicleTracker.idl
+// Simple fleet management interface
+
+module FleetManagement {
+
+    struct GeoPosition {
+        double latitude;
+        double longitude;
+        float  speed_kmh;
+        short  heading;
+    };
+
+    enum VehicleStatus { MOVING, IDLE, PARKED, MAINTENANCE };
+
+    struct VehicleInfo {
+        string         vehicle_id;
+        string         driver_name;
+        GeoPosition    position;
+        VehicleStatus  status;
+        float          fuel_level_pct;
+        unsigned long  odometer_km;
+    };
+
+    typedef sequence<VehicleInfo> VehicleInfoList;
+
+    exception VehicleNotFound {
+        string vehicle_id;
+        string message;
+    };
+
+    interface VehicleTracker {
+        VehicleInfo getVehicle(in string vehicle_id) raises (VehicleNotFound);
+        void updatePosition(in string vehicle_id, in GeoPosition pos) raises (VehicleNotFound);
+        VehicleInfoList listVehicles();
+        long getVehicleCount();
+        string ping();
+        void shutdown();
+    };
+};

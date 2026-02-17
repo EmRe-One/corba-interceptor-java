@@ -1,12 +1,1 @@
-2026-02-17 06:08:30.821 [main] WARN  tr.akguel.CORBAMonitorAgent — ✗ Monitor API is NOT reachable at http://localhost:8080/api — events will be queued
-2026-02-17 06:13:52.490 [main] WARN  tr.akguel.CORBAMonitorAgent — ✗ Monitor API is NOT reachable at http://localhost:8080/api — events will be queued
-2026-02-17 06:14:33.236 [main] WARN  tr.akguel.CORBAMonitorAgent — ✗ Monitor API is NOT reachable at https://corba-interceptor-web.test/api — events will be queued
-2026-02-17 06:16:47.203 [main] WARN  tr.akguel.CORBAMonitorAgent — ✗ Monitor API is NOT reachable at https://corba-interceptor-web.test/api — events will be queued
-2026-02-17 19:07:48.982 [main] WARN  tr.akguel.CORBAMonitorAgent — ✗ Monitor API is NOT reachable at https://corba-interceptor-web.test/api — events will be queued
-2026-02-17 19:09:10.637 [main] WARN  tr.akguel.CORBAMonitorAgent — ✗ Monitor API Health is NOT reachable at https://corba-interceptor-web.test/api/health — events will be queued
-2026-02-17 19:12:07.123 [main] WARN  tr.akguel.CORBAMonitorAgent — ✗ Monitor API Health is NOT reachable at https://corba-interceptor-web.test/api/health — events will be queued
-2026-02-17 19:12:09.483 [main] WARN  tr.akguel.CORBAMonitorAgent — ✗ Monitor API Health is NOT reachable at http://corba-interceptor-web.test/api/health — events will be queued
-2026-02-17 19:14:03.445 [main] WARN  tr.akguel.CORBAMonitorAgent — ✗ Monitor API Health is NOT reachable at http://corba-interceptor-web.test/api/health — events will be queued
-2026-02-17 19:14:15.543 [main] WARN  tr.akguel.CORBAMonitorAgent — ✗ Monitor API Health is NOT reachable at https://corba-interceptor-web.test/api/health — events will be queued
-2026-02-17 19:25:07.490 [main] WARN  tr.akguel.CORBAMonitorAgent — ✗ Monitor API Health is NOT reachable at https://corba-interceptor-web.test/api/health — events will be queued
-2026-02-17 19:30:42.933 [main] WARN  tr.akguel.api.MonitorApiClient — SSL verification DISABLED — do NOT use in production
+2026-02-18 00:07:06.327 [main] WARN  tr.akguel.api.MonitorApiClient — SSL verification DISABLED — do NOT use in production

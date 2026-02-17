@@ -24,6 +24,7 @@ class MonitorConfig private constructor() {
     val nameserverPort: Int
     val scanIntervalSeconds: Int
     val scanEnabled: Boolean
+    val sslTrustAll: Boolean
 
     init {
         val props: Properties = loadProperties()
@@ -45,6 +46,7 @@ class MonitorConfig private constructor() {
         this.scanIntervalSeconds =
             resolve(props, "monitor.scan.interval.seconds", "CORBA_MONITOR_SCAN_INTERVAL", "30")!!.toInt()
         this.scanEnabled = resolve(props, "monitor.scan.enabled", "CORBA_MONITOR_SCAN_ENABLED", "true")!!.toBoolean()
+        this.sslTrustAll = resolve(props, "monitor.ssl.trust-all", "CORBA_MONITOR_SSL_TRUST_ALL", "false")!!.toBoolean()
     }
 
     private fun loadProperties(): Properties {

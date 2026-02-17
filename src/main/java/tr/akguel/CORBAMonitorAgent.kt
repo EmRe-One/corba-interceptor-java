@@ -59,11 +59,11 @@ class CORBAMonitorAgent {
 
         // Health check
         if (apiClient.healthCheck()) {
-            log.info("✓ Monitor API is reachable at {}", config.apiBaseUrl)
+            log.info("✓ Monitor API Health is reachable at {}", config.healthEndpoint)
         } else {
             log.warn(
-                "✗ Monitor API is NOT reachable at {} — events will be queued",
-                config.apiBaseUrl
+                "✗ Monitor API Health is NOT reachable at {} — events will be queued",
+                config.healthEndpoint
             )
         }
 

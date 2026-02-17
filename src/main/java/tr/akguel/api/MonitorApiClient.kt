@@ -10,9 +10,13 @@ import java.net.HttpURLConnection
 import java.net.URI
 import java.net.URL
 import java.nio.charset.StandardCharsets
+import java.security.SecureRandom
+import java.security.cert.X509Certificate
 import java.util.concurrent.*
 import java.util.concurrent.atomic.AtomicLong
+import javax.net.ssl.*
 import kotlin.concurrent.Volatile
+
 
 /**
  * Async HTTP client that batches TrafficEvents and sends them to the Monitor API.
@@ -25,7 +29,8 @@ import kotlin.concurrent.Volatile
  * - Metrics: tracks sent/failed/queued counts
  */
 class MonitorApiClient private constructor() {
-    private val config: MonitorConfig
+
+    private val config: MonitorConfig = MonitorConfig.instance!!
     private val gson: Gson
     private val eventQueue: BlockingQueue<TrafficEvent>
     private val httpPool: ExecutorService
@@ -39,7 +44,6 @@ class MonitorApiClient private constructor() {
     private var running = true
 
     init {
-        this.config = MonitorConfig.instance!!
         this.gson = GsonBuilder()
             .disableHtmlEscaping()
             .serializeNulls()
@@ -55,6 +59,12 @@ class MonitorApiClient private constructor() {
             t.setDaemon(true)
             t
         })
+
+        // Disable SSL verification in dev mode
+        if (config.sslTrustAll) {
+            disableSslVerification();
+            log.warn("SSL verification DISABLED — do NOT use in production");
+        }
 
         // Schedule periodic flush
         scheduler.scheduleAtFixedRate(
@@ -122,7 +132,7 @@ class MonitorApiClient private constructor() {
 
             val status: Int = post(config.batchEndpoint, json)
 
-            if (status >= 200 && status < 300) {
+            if (status in 200..<300) {
                 sentCount.addAndGet(batch.size.toLong())
                 log.debug("Sent batch of {} events (total: {})", batch.size, sentCount.get())
             } else {
@@ -147,7 +157,7 @@ class MonitorApiClient private constructor() {
             val json: String = gson.toJson(event)
             val status: Int = post(config.trafficEndpoint, json)
 
-            if (status >= 200 && status < 300) {
+            if (status in 200..<300) {
                 sentCount.incrementAndGet()
                 log.debug("Sent event: {} (total: {})", event.operation, sentCount.get())
             } else {
@@ -167,6 +177,9 @@ class MonitorApiClient private constructor() {
     private fun post(endpoint: String, json: String): Int {
         val url: URL = URI(endpoint).toURL()
         val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
+        if (conn is HttpsURLConnection && config.sslTrustAll) {
+            applyTrustAll(conn)
+        }
         try {
             conn.setRequestMethod("POST")
             conn.setDoOutput(true)
@@ -198,8 +211,11 @@ class MonitorApiClient private constructor() {
      */
     fun healthCheck(): Boolean {
         try {
-            val url: URL = URI("${config.healthEndpoint}/health").toURL()
+            val url: URL = URI(config.healthEndpoint).toURL()
             val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
+            if (conn is HttpsURLConnection && config.sslTrustAll) {
+                applyTrustAll(conn)
+            }
             conn.setRequestMethod("GET")
             conn.setConnectTimeout(3000)
             conn.setReadTimeout(3000)
@@ -208,6 +224,47 @@ class MonitorApiClient private constructor() {
             return status == 200
         } catch (e: Exception) {
             return false
+        }
+    }
+
+    // ─── SSL Trust-All (Development Only) ─────────────────────────────
+    /**
+     * Disable SSL certificate verification globally.
+     * WARNING: Only for local development!
+     */
+    private fun disableSslVerification() {
+        try {
+            val trustAll: Array<TrustManager> = arrayOf<TrustManager>(object : X509TrustManager {
+                override fun getAcceptedIssuers(): Array<X509Certificate?>? {
+                    return kotlin.arrayOfNulls<X509Certificate>(0)
+                }
+
+                override fun checkClientTrusted(certs: Array<X509Certificate?>?, authType: String?) {}
+                override fun checkServerTrusted(certs: Array<X509Certificate?>?, authType: String?) {}
+            })
+
+            val sc = SSLContext.getInstance("TLS")
+            sc.init(null, trustAll, SecureRandom())
+            trustAllSocketFactory = sc.socketFactory
+            trustAllHostnameVerifier = HostnameVerifier { hostname: String?, session: SSLSession? -> true }
+
+            // Also set as default for any other HTTPS connections
+            HttpsURLConnection.setDefaultSSLSocketFactory(trustAllSocketFactory)
+            HttpsURLConnection.setDefaultHostnameVerifier(trustAllHostnameVerifier)
+        } catch (e: java.lang.Exception) {
+            log.error("Failed to disable SSL verification: {}", e.message)
+        }
+    }
+
+    /**
+     * Apply trust-all settings to a specific HTTPS connection.
+     */
+    private fun applyTrustAll(conn: HttpsURLConnection) {
+        if (trustAllSocketFactory != null) {
+            conn.sslSocketFactory = trustAllSocketFactory
+        }
+        if (trustAllHostnameVerifier != null) {
+            conn.setHostnameVerifier(trustAllHostnameVerifier)
         }
     }
 
@@ -236,6 +293,8 @@ class MonitorApiClient private constructor() {
 
     companion object {
         private val log: Logger = LoggerFactory.getLogger(MonitorApiClient::class.java)
+        private var trustAllSocketFactory: SSLSocketFactory? = null
+        private var trustAllHostnameVerifier: HostnameVerifier? = null
 
         @get:Synchronized
         var instance: MonitorApiClient? = null

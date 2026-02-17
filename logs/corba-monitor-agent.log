@@ -1,0 +1,4 @@
+2026-02-17 06:08:30.821 [main] WARN  tr.akguel.CORBAMonitorAgent — ✗ Monitor API is NOT reachable at http://localhost:8080/api — events will be queued
+2026-02-17 06:13:52.490 [main] WARN  tr.akguel.CORBAMonitorAgent — ✗ Monitor API is NOT reachable at http://localhost:8080/api — events will be queued
+2026-02-17 06:14:33.236 [main] WARN  tr.akguel.CORBAMonitorAgent — ✗ Monitor API is NOT reachable at https://corba-interceptor-web.test/api — events will be queued
+2026-02-17 06:16:47.203 [main] WARN  tr.akguel.CORBAMonitorAgent — ✗ Monitor API is NOT reachable at https://corba-interceptor-web.test/api — events will be queued

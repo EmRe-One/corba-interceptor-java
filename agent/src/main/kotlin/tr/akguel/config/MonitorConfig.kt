@@ -29,7 +29,7 @@ class MonitorConfig private constructor() {
     init {
         val props: Properties = loadProperties()
 
-        this.apiBaseUrl = resolve(props, "monitor.api.url", "CORBA_MONITOR_API_URL", "http://localhost:8080/api")!!
+        this.apiBaseUrl = resolve(props, "monitor.api.url", "CORBA_MONITOR_API_URL", "http://localhost:8000/api")!!
         this.apiToken = resolve(props, "monitor.api.token", "CORBA_MONITOR_API_TOKEN", "")!!
         this.batchSize = resolve(props, "monitor.batch.size", "CORBA_MONITOR_BATCH_SIZE", "50")!!.toInt()
         this.flushIntervalMs = resolve(props, "monitor.flush.interval.ms", "CORBA_MONITOR_FLUSH_MS", "1000")!!.toInt()
@@ -52,7 +52,7 @@ class MonitorConfig private constructor() {
     private fun loadProperties(): Properties {
         val props = Properties()
         try {
-            javaClass.getClassLoader().getResourceAsStream(MonitorConfig.Companion.PROPS_FILE).use { `is` ->
+            javaClass.getClassLoader().getResourceAsStream(PROPS_FILE).use { `is` ->
                 if (`is` != null) {
                     props.load(`is`)
                 }

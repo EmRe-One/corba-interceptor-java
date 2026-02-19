@@ -12,7 +12,7 @@ import tr.akguel.api.TrafficEvent
 import tr.akguel.config.MonitorConfig
 import tr.akguel.interceptor.RequestTimingStore.getAndRemoveStartTime
 import java.net.InetAddress
-import java.util.UUID
+import java.util.*
 import kotlin.math.min
 
 /**
@@ -43,10 +43,21 @@ class ServerInterceptor : LocalObject(), ServerRequestInterceptor {
         return "CORBAMonitorServerInterceptor"
     }
 
+    private fun shouldSkip(ri: ServerRequestInfo): Boolean {
+        try {
+            val op = ri.operation()
+            return op != null && SKIP_OPERATIONS.contains(op)
+        } catch (e: java.lang.Exception) {
+            return false
+        }
+    }
+
     /**
      * Called when a request arrives at the server, before dispatch.
      */
     override fun receive_request_service_contexts(ri: ServerRequestInfo) {
+        if (shouldSkip(ri)) return
+
         try {
             RequestTimingStore.setStartTime(ri.request_id().toString().toByteArray(Charsets.UTF_8), System.nanoTime())
         } catch (e: Exception) {
@@ -59,6 +70,8 @@ class ServerInterceptor : LocalObject(), ServerRequestInterceptor {
      */
     @Throws(ForwardRequest::class)
     override fun receive_request(ri: ServerRequestInfo) {
+        if (shouldSkip(ri)) return
+
         try {
             val event: TrafficEvent = buildBaseEvent(ri, "receive_request")
                 .direction("request")
@@ -81,6 +94,8 @@ class ServerInterceptor : LocalObject(), ServerRequestInterceptor {
      * Called after the servant has processed the request, before sending reply.
      */
     override fun send_reply(ri: ServerRequestInfo) {
+        if (shouldSkip(ri)) return
+
         try {
             val latency: Double? = calculateLatency(ri.request_id().toString().toByteArray(Charsets.UTF_8))
 
@@ -106,6 +121,8 @@ class ServerInterceptor : LocalObject(), ServerRequestInterceptor {
      */
     @Throws(ForwardRequest::class)
     override fun send_exception(ri: ServerRequestInfo) {
+        if (shouldSkip(ri)) return
+
         try {
             val latency: Double? = calculateLatency(ri.request_id().toString().toByteArray(Charsets.UTF_8))
 
@@ -221,5 +238,16 @@ class ServerInterceptor : LocalObject(), ServerRequestInterceptor {
 
     companion object {
         private val log: Logger = LoggerFactory.getLogger(ServerInterceptor::class.java)
+
+        /**
+         * Operations to skip (CORBA infrastructure / Naming Service internals).
+         */
+        val SKIP_OPERATIONS: MutableSet<String> = mutableSetOf<String>(
+            "_is_a", "_non_existent", "_get_interface_def", "_get_component",
+            "_get_domain_managers", "_get_policy", "_repository_id",
+            "resolve", "resolve_str", "bind", "rebind", "unbind",
+            "bind_context", "rebind_context", "bind_new_context",
+            "list", "to_name", "to_string", "destroy", "new_context", "to_url"
+        )
     }
 }

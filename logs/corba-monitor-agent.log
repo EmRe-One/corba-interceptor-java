@@ -20,3 +20,228 @@
 2026-02-20 00:06:45.960 [corba-monitor-http] INFO  tr.akguel.api.MonitorApiClient — Sending batch to https://corba-interceptor-web.test/api/traffic/batch. Body: {"events":[{"request_id":"30","operation":"_is_a","interface_name":"Object","repository_id":"IDL:omg.org/CORBA/Object:1.0","direction":"reply","status":"timeout","source_host":"10.5.0.2","source_port":null,"target_host":null,"target_port":null,"source_service_name":null,"target_service_name":null,"request_data":null,"response_data":null,"error_message":"CORBA::TRANSIENT","exception_type":"SYSTEM_EXCEPTION","latency_ms":1532.2798,"giop_version":"1.2","message_type":"Reply","request_size_bytes":null,"response_size_bytes":null,"interceptor_point":"receive_exception","context_data":null,"timestamp":"2026-02-19T21:06:45.056916100Z"},{"request_id":"30","operation":"_is_a","interface_name":"Object","repository_id":"IDL:omg.org/CORBA/Object:1.0","direction":"request","status":"success","source_host":"10.5.0.2","source_port":null,"target_host":null,"target_port":null,"source_service_name":null,"target_service_name":null,"request_data":{"_note":"Could not extract arguments: Stream-based skeletons/stubs do not support this op"},"response_data":null,"error_message":null,"exception_type":null,"latency_ms":null,"giop_version":"1.2","message_type":"Request","request_size_bytes":null,"response_size_bytes":null,"interceptor_point":"send_request","context_data":null,"timestamp":"2026-02-19T21:06:45.057920800Z"}]}
 2026-02-20 00:06:46.590 [main] ERROR t.a.nameserver.NameserverScanner — Failed to start nameserver scanner: Retries exceeded, couldn't reconnect to 127.0.0.1:2809
 2026-02-20 00:06:46.591 [main] INFO  tr.akguel.CORBAMonitorAgent — Agent running. Press Ctrl+C to stop.
+2026-02-20 00:20:20.227 [corba-monitor-shutdown] INFO  tr.akguel.CORBAMonitorAgent — Shutting down CORBA Monitor Agent...
+2026-02-20 00:20:20.227 [corba-monitor-shutdown] INFO  tr.akguel.api.MonitorApiClient — Shutting down MonitorApiClient...
+2026-02-20 00:20:20.227 [corba-monitor-shutdown] INFO  tr.akguel.api.MonitorApiClient — MonitorApiClient shutdown complete. Sent: 4, Failed: 0, Dropped: 0
+2026-02-20 00:20:20.227 [corba-monitor-shutdown] INFO  t.a.interceptor.ClientInterceptor — ClientInterceptor destroyed
+2026-02-20 00:20:20.227 [corba-monitor-shutdown] INFO  t.a.interceptor.ServerInterceptor — ServerInterceptor destroyed
+2026-02-20 00:20:20.229 [corba-monitor-shutdown] INFO  tr.akguel.CORBAMonitorAgent — Agent stopped. Stats: sent=4, failed=0, dropped=0
+2026-02-20 00:31:33.070 [main] INFO  tr.akguel.CORBAMonitorAgent — ╔══════════════════════════════════════════════════╗
+2026-02-20 00:31:33.071 [main] INFO  tr.akguel.CORBAMonitorAgent — ║       CORBA Monitor Agent v1.0.0                ║
+2026-02-20 00:31:33.071 [main] INFO  tr.akguel.CORBAMonitorAgent — ║       Standalone Mode                           ║
+2026-02-20 00:31:33.071 [main] INFO  tr.akguel.CORBAMonitorAgent — ╚══════════════════════════════════════════════════╝
+2026-02-20 00:31:33.075 [main] INFO  tr.akguel.CORBAMonitorAgent — Configuration: MonitorConfig{api=http://127.0.0.1:8000/api, batch=50, flush=1000ms, capture_req=true, capture_res=true, ns=localhost:2809, scan=true/30s}
+2026-02-20 00:31:33.240 [main] WARN  tr.akguel.api.MonitorApiClient — SSL verification DISABLED — do NOT use in production
+2026-02-20 00:31:33.244 [main] INFO  tr.akguel.api.MonitorApiClient — MonitorApiClient started: MonitorConfig{api=http://127.0.0.1:8000/api, batch=50, flush=1000ms, capture_req=true, capture_res=true, ns=localhost:2809, scan=true/30s}
+2026-02-20 00:31:35.940 [main] INFO  tr.akguel.CORBAMonitorAgent — ✓ Monitor API Health is reachable at http://127.0.0.1:8000/api/health
+2026-02-20 00:31:35.941 [main] INFO  tr.akguel.CORBAMonitorAgent — Initializing ORB (nameserver=localhost:2809)
+2026-02-20 00:31:35.975 [main] INFO  t.a.i.MonitorORBInitializer — ╔══════════════════════════════════════════════════╗
+2026-02-20 00:31:35.976 [main] INFO  t.a.i.MonitorORBInitializer — ║       CORBA Monitor Interceptor Agent           ║
+2026-02-20 00:31:35.976 [main] INFO  t.a.i.MonitorORBInitializer — ╚══════════════════════════════════════════════════╝
+2026-02-20 00:31:35.983 [main] INFO  t.a.interceptor.ClientInterceptor — ClientInterceptor initialized (slot=0)
+2026-02-20 00:31:35.983 [main] INFO  t.a.i.MonitorORBInitializer — ✓ ClientRequestInterceptor registered
+2026-02-20 00:31:35.985 [main] INFO  t.a.interceptor.ServerInterceptor — ServerInterceptor initialized
+2026-02-20 00:31:35.985 [main] INFO  t.a.i.MonitorORBInitializer — ✓ ServerRequestInterceptor registered
+2026-02-20 00:31:35.986 [main] INFO  t.a.i.MonitorORBInitializer — CORBA Monitor interceptors active — forwarding traffic to API
+2026-02-20 00:31:35.992 [main] INFO  tr.akguel.CORBAMonitorAgent — ✓ ORB initialized
+2026-02-20 00:31:48.271 [main] INFO  t.a.nameserver.NameserverScanner — Trying corbaloc: corbaloc:iiop:localhost:2809/NameService
+2026-02-20 00:31:49.255 [corba-monitor-http] INFO  tr.akguel.api.MonitorApiClient — Sending batch to http://127.0.0.1:8000/api/traffic/batch
+2026-02-20 00:32:07.054 [main] ERROR t.a.nameserver.NameserverScanner — Failed to start nameserver scanner: Retries exceeded, couldn't reconnect to 127.0.0.1:2809
+2026-02-20 00:32:09.592 [main] INFO  tr.akguel.CORBAMonitorAgent — Agent running. Press Ctrl+C to stop.
+2026-02-20 00:35:02.911 [corba-monitor-shutdown] INFO  tr.akguel.CORBAMonitorAgent — Shutting down CORBA Monitor Agent...
+2026-02-20 00:35:02.911 [corba-monitor-shutdown] INFO  tr.akguel.api.MonitorApiClient — Shutting down MonitorApiClient...
+2026-02-20 00:35:02.912 [corba-monitor-shutdown] INFO  tr.akguel.api.MonitorApiClient — MonitorApiClient shutdown complete. Sent: 4, Failed: 0, Dropped: 0
+2026-02-20 00:35:02.912 [corba-monitor-shutdown] INFO  t.a.interceptor.ClientInterceptor — ClientInterceptor destroyed
+2026-02-20 00:35:02.912 [corba-monitor-shutdown] INFO  t.a.interceptor.ServerInterceptor — ServerInterceptor destroyed
+2026-02-20 00:35:02.912 [corba-monitor-shutdown] INFO  tr.akguel.CORBAMonitorAgent — Agent stopped. Stats: sent=4, failed=0, dropped=0
+2026-02-20 00:35:05.478 [main] INFO  tr.akguel.CORBAMonitorAgent — ╔══════════════════════════════════════════════════╗
+2026-02-20 00:35:05.479 [main] INFO  tr.akguel.CORBAMonitorAgent — ║       CORBA Monitor Agent v1.0.0                ║
+2026-02-20 00:35:05.479 [main] INFO  tr.akguel.CORBAMonitorAgent — ║       Standalone Mode                           ║
+2026-02-20 00:35:05.479 [main] INFO  tr.akguel.CORBAMonitorAgent — ╚══════════════════════════════════════════════════╝
+2026-02-20 00:35:05.484 [main] INFO  tr.akguel.CORBAMonitorAgent — Configuration: MonitorConfig{api=http://127.0.0.1:8000/api, batch=50, flush=1000ms, capture_req=true, capture_res=true, ns=localhost:2809, scan=true/30s}
+2026-02-20 00:35:05.647 [main] WARN  tr.akguel.api.MonitorApiClient — SSL verification DISABLED — do NOT use in production
+2026-02-20 00:35:05.653 [main] INFO  tr.akguel.api.MonitorApiClient — MonitorApiClient started: MonitorConfig{api=http://127.0.0.1:8000/api, batch=50, flush=1000ms, capture_req=true, capture_res=true, ns=localhost:2809, scan=true/30s}
+2026-02-20 00:35:08.355 [main] INFO  tr.akguel.CORBAMonitorAgent — ✓ Monitor API Health is reachable at http://127.0.0.1:8000/api/health
+2026-02-20 00:35:08.356 [main] INFO  tr.akguel.CORBAMonitorAgent — Initializing ORB (nameserver=localhost:2809)
+2026-02-20 00:35:08.386 [main] INFO  t.a.i.MonitorORBInitializer — ╔══════════════════════════════════════════════════╗
+2026-02-20 00:35:08.386 [main] INFO  t.a.i.MonitorORBInitializer — ║       CORBA Monitor Interceptor Agent           ║
+2026-02-20 00:35:08.386 [main] INFO  t.a.i.MonitorORBInitializer — ╚══════════════════════════════════════════════════╝
+2026-02-20 00:35:08.394 [main] INFO  t.a.interceptor.ClientInterceptor — ClientInterceptor initialized (slot=0)
+2026-02-20 00:35:08.394 [main] INFO  t.a.i.MonitorORBInitializer — ✓ ClientRequestInterceptor registered
+2026-02-20 00:35:08.395 [main] INFO  t.a.interceptor.ServerInterceptor — ServerInterceptor initialized
+2026-02-20 00:35:08.395 [main] INFO  t.a.i.MonitorORBInitializer — ✓ ServerRequestInterceptor registered
+2026-02-20 00:35:08.395 [main] INFO  t.a.i.MonitorORBInitializer — CORBA Monitor interceptors active — forwarding traffic to API
+2026-02-20 00:35:08.402 [main] INFO  tr.akguel.CORBAMonitorAgent — ✓ ORB initialized
+2026-02-20 00:35:12.127 [main] INFO  t.a.nameserver.NameserverScanner — Trying corbaloc: corbaloc:iiop:localhost:2809/NameService
+2026-02-20 00:35:12.662 [corba-monitor-http] INFO  tr.akguel.api.MonitorApiClient — Sending batch to http://127.0.0.1:8000/api/traffic/batch
+2026-02-20 00:35:23.299 [main] ERROR t.a.nameserver.NameserverScanner — Failed to start nameserver scanner: Retries exceeded, couldn't reconnect to 127.0.0.1:2809
+2026-02-20 00:35:23.301 [main] INFO  tr.akguel.CORBAMonitorAgent — Agent running. Press Ctrl+C to stop.
+2026-02-20 00:35:23.321 [corba-monitor-shutdown] INFO  tr.akguel.CORBAMonitorAgent — Shutting down CORBA Monitor Agent...
+2026-02-20 00:35:23.326 [corba-monitor-shutdown] INFO  tr.akguel.api.MonitorApiClient — Shutting down MonitorApiClient...
+2026-02-20 00:35:23.904 [corba-monitor-shutdown] INFO  tr.akguel.api.MonitorApiClient — MonitorApiClient shutdown complete. Sent: 4, Failed: 0, Dropped: 0
+2026-02-20 00:35:23.905 [corba-monitor-shutdown] INFO  t.a.interceptor.ClientInterceptor — ClientInterceptor destroyed
+2026-02-20 00:35:23.905 [corba-monitor-shutdown] INFO  t.a.interceptor.ServerInterceptor — ServerInterceptor destroyed
+2026-02-20 00:35:23.905 [corba-monitor-shutdown] INFO  tr.akguel.CORBAMonitorAgent — Agent stopped. Stats: sent=4, failed=0, dropped=0
+2026-02-20 00:35:25.612 [main] INFO  tr.akguel.CORBAMonitorAgent — ╔══════════════════════════════════════════════════╗
+2026-02-20 00:35:25.613 [main] INFO  tr.akguel.CORBAMonitorAgent — ║       CORBA Monitor Agent v1.0.0                ║
+2026-02-20 00:35:25.614 [main] INFO  tr.akguel.CORBAMonitorAgent — ║       Standalone Mode                           ║
+2026-02-20 00:35:25.614 [main] INFO  tr.akguel.CORBAMonitorAgent — ╚══════════════════════════════════════════════════╝
+2026-02-20 00:35:25.617 [main] INFO  tr.akguel.CORBAMonitorAgent — Configuration: MonitorConfig{api=http://127.0.0.1:8000/api, batch=50, flush=1000ms, capture_req=true, capture_res=true, ns=localhost:2809, scan=true/30s}
+2026-02-20 00:35:25.769 [main] WARN  tr.akguel.api.MonitorApiClient — SSL verification DISABLED — do NOT use in production
+2026-02-20 00:35:25.775 [main] INFO  tr.akguel.api.MonitorApiClient — MonitorApiClient started: MonitorConfig{api=http://127.0.0.1:8000/api, batch=50, flush=1000ms, capture_req=true, capture_res=true, ns=localhost:2809, scan=true/30s}
+2026-02-20 00:35:28.385 [main] INFO  tr.akguel.CORBAMonitorAgent — ✓ Monitor API Health is reachable at http://127.0.0.1:8000/api/health
+2026-02-20 00:35:28.385 [main] INFO  tr.akguel.CORBAMonitorAgent — Initializing ORB (nameserver=localhost:2809)
+2026-02-20 00:35:28.417 [main] INFO  t.a.i.MonitorORBInitializer — ╔══════════════════════════════════════════════════╗
+2026-02-20 00:35:28.417 [main] INFO  t.a.i.MonitorORBInitializer — ║       CORBA Monitor Interceptor Agent           ║
+2026-02-20 00:35:28.417 [main] INFO  t.a.i.MonitorORBInitializer — ╚══════════════════════════════════════════════════╝
+2026-02-20 00:35:28.425 [main] INFO  t.a.interceptor.ClientInterceptor — ClientInterceptor initialized (slot=0)
+2026-02-20 00:35:28.426 [main] INFO  t.a.i.MonitorORBInitializer — ✓ ClientRequestInterceptor registered
+2026-02-20 00:35:28.427 [main] INFO  t.a.interceptor.ServerInterceptor — ServerInterceptor initialized
+2026-02-20 00:35:28.427 [main] INFO  t.a.i.MonitorORBInitializer — ✓ ServerRequestInterceptor registered
+2026-02-20 00:35:28.427 [main] INFO  t.a.i.MonitorORBInitializer — CORBA Monitor interceptors active — forwarding traffic to API
+2026-02-20 00:35:28.435 [main] INFO  tr.akguel.CORBAMonitorAgent — ✓ ORB initialized
+2026-02-20 00:35:47.883 [main] INFO  t.a.nameserver.NameserverScanner — Trying corbaloc: corbaloc:iiop:localhost:2809/NameService
+2026-02-20 00:35:57.924 [main] ERROR t.a.nameserver.NameserverScanner — Failed to start nameserver scanner: Retries exceeded, couldn't reconnect to 127.0.0.1:2809
+2026-02-20 00:35:57.925 [main] INFO  tr.akguel.CORBAMonitorAgent — Agent running. Press Ctrl+C to stop.
+2026-02-20 00:36:01.367 [corba-monitor-shutdown] INFO  tr.akguel.CORBAMonitorAgent — Shutting down CORBA Monitor Agent...
+2026-02-20 00:36:01.367 [corba-monitor-shutdown] INFO  tr.akguel.api.MonitorApiClient — Shutting down MonitorApiClient...
+2026-02-20 00:36:01.368 [corba-monitor-shutdown] INFO  tr.akguel.api.MonitorApiClient — MonitorApiClient shutdown complete. Sent: 4, Failed: 0, Dropped: 0
+2026-02-20 00:36:01.368 [corba-monitor-shutdown] INFO  t.a.interceptor.ClientInterceptor — ClientInterceptor destroyed
+2026-02-20 00:36:01.368 [corba-monitor-shutdown] INFO  t.a.interceptor.ServerInterceptor — ServerInterceptor destroyed
+2026-02-20 00:36:01.369 [corba-monitor-shutdown] INFO  tr.akguel.CORBAMonitorAgent — Agent stopped. Stats: sent=4, failed=0, dropped=0
+2026-02-20 00:36:02.986 [main] INFO  tr.akguel.CORBAMonitorAgent — ╔══════════════════════════════════════════════════╗
+2026-02-20 00:36:02.987 [main] INFO  tr.akguel.CORBAMonitorAgent — ║       CORBA Monitor Agent v1.0.0                ║
+2026-02-20 00:36:02.987 [main] INFO  tr.akguel.CORBAMonitorAgent — ║       Standalone Mode                           ║
+2026-02-20 00:36:02.987 [main] INFO  tr.akguel.CORBAMonitorAgent — ╚══════════════════════════════════════════════════╝
+2026-02-20 00:36:02.991 [main] INFO  tr.akguel.CORBAMonitorAgent — Configuration: MonitorConfig{api=http://127.0.0.1:8000/api, batch=50, flush=1000ms, capture_req=true, capture_res=true, ns=localhost:2809, scan=true/30s}
+2026-02-20 00:36:03.133 [main] WARN  tr.akguel.api.MonitorApiClient — SSL verification DISABLED — do NOT use in production
+2026-02-20 00:36:03.137 [main] INFO  tr.akguel.api.MonitorApiClient — MonitorApiClient started: MonitorConfig{api=http://127.0.0.1:8000/api, batch=50, flush=1000ms, capture_req=true, capture_res=true, ns=localhost:2809, scan=true/30s}
+2026-02-20 00:36:05.699 [main] INFO  tr.akguel.CORBAMonitorAgent — ✓ Monitor API Health is reachable at http://127.0.0.1:8000/api/health
+2026-02-20 00:36:05.699 [main] INFO  tr.akguel.CORBAMonitorAgent — Initializing ORB (nameserver=localhost:2809)
+2026-02-20 00:36:05.731 [main] INFO  t.a.i.MonitorORBInitializer — ╔══════════════════════════════════════════════════╗
+2026-02-20 00:36:05.731 [main] INFO  t.a.i.MonitorORBInitializer — ║       CORBA Monitor Interceptor Agent           ║
+2026-02-20 00:36:05.731 [main] INFO  t.a.i.MonitorORBInitializer — ╚══════════════════════════════════════════════════╝
+2026-02-20 00:36:05.739 [main] INFO  t.a.interceptor.ClientInterceptor — ClientInterceptor initialized (slot=0)
+2026-02-20 00:36:05.739 [main] INFO  t.a.i.MonitorORBInitializer — ✓ ClientRequestInterceptor registered
+2026-02-20 00:36:05.741 [main] INFO  t.a.interceptor.ServerInterceptor — ServerInterceptor initialized
+2026-02-20 00:36:05.741 [main] INFO  t.a.i.MonitorORBInitializer — ✓ ServerRequestInterceptor registered
+2026-02-20 00:36:05.741 [main] INFO  t.a.i.MonitorORBInitializer — CORBA Monitor interceptors active — forwarding traffic to API
+2026-02-20 00:36:05.746 [main] INFO  tr.akguel.CORBAMonitorAgent — ✓ ORB initialized
+2026-02-20 00:36:16.685 [main] INFO  t.a.nameserver.NameserverScanner — Trying corbaloc: corbaloc:iiop:localhost:2809/NameService
+2026-02-20 00:37:38.374 [main] ERROR t.a.nameserver.NameserverScanner — Failed to start nameserver scanner: Retries exceeded, couldn't reconnect to 127.0.0.1:2809
+2026-02-20 00:37:38.375 [main] INFO  tr.akguel.CORBAMonitorAgent — Agent running. Press Ctrl+C to stop.
+2026-02-20 00:37:44.298 [corba-monitor-shutdown] INFO  tr.akguel.CORBAMonitorAgent — Shutting down CORBA Monitor Agent...
+2026-02-20 00:37:44.298 [corba-monitor-shutdown] INFO  tr.akguel.api.MonitorApiClient — Shutting down MonitorApiClient...
+2026-02-20 00:37:44.299 [corba-monitor-shutdown] INFO  tr.akguel.api.MonitorApiClient — MonitorApiClient shutdown complete. Sent: 4, Failed: 0, Dropped: 0
+2026-02-20 00:37:44.299 [corba-monitor-shutdown] INFO  t.a.interceptor.ClientInterceptor — ClientInterceptor destroyed
+2026-02-20 00:37:44.299 [corba-monitor-shutdown] INFO  t.a.interceptor.ServerInterceptor — ServerInterceptor destroyed
+2026-02-20 00:37:44.299 [corba-monitor-shutdown] INFO  tr.akguel.CORBAMonitorAgent — Agent stopped. Stats: sent=4, failed=0, dropped=0
+2026-02-20 00:37:51.318 [main] INFO  tr.akguel.CORBAMonitorAgent — ╔══════════════════════════════════════════════════╗
+2026-02-20 00:37:51.319 [main] INFO  tr.akguel.CORBAMonitorAgent — ║       CORBA Monitor Agent v1.0.0                ║
+2026-02-20 00:37:51.319 [main] INFO  tr.akguel.CORBAMonitorAgent — ║       Standalone Mode                           ║
+2026-02-20 00:37:51.319 [main] INFO  tr.akguel.CORBAMonitorAgent — ╚══════════════════════════════════════════════════╝
+2026-02-20 00:37:51.323 [main] INFO  tr.akguel.CORBAMonitorAgent — Configuration: MonitorConfig{api=http://127.0.0.1:8000/api, batch=50, flush=1000ms, capture_req=true, capture_res=true, ns=localhost:2809, scan=true/30s}
+2026-02-20 00:37:51.442 [main] WARN  tr.akguel.api.MonitorApiClient — SSL verification DISABLED — do NOT use in production
+2026-02-20 00:37:51.443 [main] INFO  tr.akguel.api.MonitorApiClient — MonitorApiClient started: MonitorConfig{api=http://127.0.0.1:8000/api, batch=50, flush=1000ms, capture_req=true, capture_res=true, ns=localhost:2809, scan=true/30s}
+2026-02-20 00:37:54.059 [main] INFO  tr.akguel.CORBAMonitorAgent — ✓ Monitor API Health is reachable at http://127.0.0.1:8000/api/health
+2026-02-20 00:37:54.059 [main] INFO  tr.akguel.CORBAMonitorAgent — Initializing ORB (nameserver=localhost:2809)
+2026-02-20 00:37:54.089 [main] INFO  t.a.i.MonitorORBInitializer — ╔══════════════════════════════════════════════════╗
+2026-02-20 00:37:54.089 [main] INFO  t.a.i.MonitorORBInitializer — ║       CORBA Monitor Interceptor Agent           ║
+2026-02-20 00:37:54.089 [main] INFO  t.a.i.MonitorORBInitializer — ╚══════════════════════════════════════════════════╝
+2026-02-20 00:37:54.096 [main] INFO  t.a.interceptor.ClientInterceptor — ClientInterceptor initialized (slot=0)
+2026-02-20 00:37:54.096 [main] INFO  t.a.i.MonitorORBInitializer — ✓ ClientRequestInterceptor registered
+2026-02-20 00:37:54.098 [main] INFO  t.a.interceptor.ServerInterceptor — ServerInterceptor initialized
+2026-02-20 00:37:54.098 [main] INFO  t.a.i.MonitorORBInitializer — ✓ ServerRequestInterceptor registered
+2026-02-20 00:37:54.099 [main] INFO  t.a.i.MonitorORBInitializer — CORBA Monitor interceptors active — forwarding traffic to API
+2026-02-20 00:37:54.104 [main] INFO  tr.akguel.CORBAMonitorAgent — ✓ ORB initialized
+2026-02-20 00:37:55.674 [main] INFO  t.a.nameserver.NameserverScanner — Trying corbaloc: corbaloc:iiop:localhost:2809/NameService
+2026-02-20 00:37:56.445 [corba-monitor-http] INFO  tr.akguel.api.MonitorApiClient — Sending batch to http://127.0.0.1:8000/api/traffic/batch
+2026-02-20 00:37:57.210 [main] ERROR t.a.nameserver.NameserverScanner — Failed to start nameserver scanner: Retries exceeded, couldn't reconnect to 127.0.0.1:2809
+2026-02-20 00:37:57.211 [main] INFO  tr.akguel.CORBAMonitorAgent — Agent running. Press Ctrl+C to stop.
+2026-02-20 00:48:42.273 [corba-monitor-shutdown] INFO  tr.akguel.CORBAMonitorAgent — Shutting down CORBA Monitor Agent...
+2026-02-20 00:48:42.273 [corba-monitor-shutdown] INFO  tr.akguel.api.MonitorApiClient — Shutting down MonitorApiClient...
+2026-02-20 00:48:42.273 [corba-monitor-shutdown] INFO  tr.akguel.api.MonitorApiClient — MonitorApiClient shutdown complete. Sent: 4, Failed: 0, Dropped: 0
+2026-02-20 00:48:42.274 [corba-monitor-shutdown] INFO  t.a.interceptor.ClientInterceptor — ClientInterceptor destroyed
+2026-02-20 00:48:42.274 [corba-monitor-shutdown] INFO  t.a.interceptor.ServerInterceptor — ServerInterceptor destroyed
+2026-02-20 00:48:42.274 [corba-monitor-shutdown] INFO  tr.akguel.CORBAMonitorAgent — Agent stopped. Stats: sent=4, failed=0, dropped=0
+2026-02-20 00:48:45.600 [main] INFO  tr.akguel.CORBAMonitorAgent — ╔══════════════════════════════════════════════════╗
+2026-02-20 00:48:45.601 [main] INFO  tr.akguel.CORBAMonitorAgent — ║       CORBA Monitor Agent v1.0.0                ║
+2026-02-20 00:48:45.602 [main] INFO  tr.akguel.CORBAMonitorAgent — ║       Standalone Mode                           ║
+2026-02-20 00:48:45.602 [main] INFO  tr.akguel.CORBAMonitorAgent — ╚══════════════════════════════════════════════════╝
+2026-02-20 00:48:45.606 [main] INFO  tr.akguel.CORBAMonitorAgent — Configuration: MonitorConfig{api=http://127.0.0.1:8000/api, batch=50, flush=1000ms, capture_req=true, capture_res=true, ns=localhost:2809, scan=true/30s}
+2026-02-20 00:48:45.752 [main] WARN  tr.akguel.api.MonitorApiClient — SSL verification DISABLED — do NOT use in production
+2026-02-20 00:48:45.758 [main] INFO  tr.akguel.api.MonitorApiClient — MonitorApiClient started: MonitorConfig{api=http://127.0.0.1:8000/api, batch=50, flush=1000ms, capture_req=true, capture_res=true, ns=localhost:2809, scan=true/30s}
+2026-02-20 00:48:48.466 [main] INFO  tr.akguel.CORBAMonitorAgent — ✓ Monitor API Health is reachable at http://127.0.0.1:8000/api/health
+2026-02-20 00:48:57.123 [main] INFO  tr.akguel.CORBAMonitorAgent — Initializing ORB (nameserver=localhost:2809)
+2026-02-20 00:49:20.897 [main] INFO  t.a.i.MonitorORBInitializer — ╔══════════════════════════════════════════════════╗
+2026-02-20 00:49:20.897 [main] INFO  t.a.i.MonitorORBInitializer — ║       CORBA Monitor Interceptor Agent           ║
+2026-02-20 00:49:20.897 [main] INFO  t.a.i.MonitorORBInitializer — ╚══════════════════════════════════════════════════╝
+2026-02-20 00:49:20.914 [main] INFO  t.a.interceptor.ClientInterceptor — ClientInterceptor initialized (slot=0)
+2026-02-20 00:49:20.915 [main] INFO  t.a.i.MonitorORBInitializer — ✓ ClientRequestInterceptor registered
+2026-02-20 00:49:20.917 [main] INFO  t.a.interceptor.ServerInterceptor — ServerInterceptor initialized
+2026-02-20 00:49:20.918 [main] INFO  t.a.i.MonitorORBInitializer — ✓ ServerRequestInterceptor registered
+2026-02-20 00:49:20.918 [main] INFO  t.a.i.MonitorORBInitializer — CORBA Monitor interceptors active — forwarding traffic to API
+2026-02-20 00:49:22.395 [main] INFO  tr.akguel.CORBAMonitorAgent — ✓ ORB initialized
+2026-02-20 00:49:44.728 [main] INFO  t.a.nameserver.NameserverScanner — Trying corbaloc: corbaloc:iiop:localhost:2809/NameService
+2026-02-20 00:59:39.131 [main] ERROR t.a.nameserver.NameserverScanner — Failed to start nameserver scanner: Retries exceeded, couldn't reconnect to 127.0.0.1:2809
+2026-02-20 00:59:39.134 [main] INFO  tr.akguel.CORBAMonitorAgent — Agent running. Press Ctrl+C to stop.
+2026-02-20 00:59:39.155 [corba-monitor-shutdown] INFO  tr.akguel.CORBAMonitorAgent — Shutting down CORBA Monitor Agent...
+2026-02-20 00:59:39.155 [corba-monitor-shutdown] INFO  tr.akguel.api.MonitorApiClient — Shutting down MonitorApiClient...
+2026-02-20 00:59:39.893 [corba-monitor-shutdown] INFO  tr.akguel.api.MonitorApiClient — MonitorApiClient shutdown complete. Sent: 4, Failed: 0, Dropped: 0
+2026-02-20 00:59:39.893 [corba-monitor-shutdown] INFO  t.a.interceptor.ClientInterceptor — ClientInterceptor destroyed
+2026-02-20 00:59:39.893 [corba-monitor-shutdown] INFO  t.a.interceptor.ServerInterceptor — ServerInterceptor destroyed
+2026-02-20 00:59:39.894 [corba-monitor-shutdown] INFO  tr.akguel.CORBAMonitorAgent — Agent stopped. Stats: sent=4, failed=0, dropped=0
+2026-02-20 00:59:43.098 [main] INFO  tr.akguel.CORBAMonitorAgent — ╔══════════════════════════════════════════════════╗
+2026-02-20 00:59:43.099 [main] INFO  tr.akguel.CORBAMonitorAgent — ║       CORBA Monitor Agent v1.0.0                ║
+2026-02-20 00:59:43.099 [main] INFO  tr.akguel.CORBAMonitorAgent — ║       Standalone Mode                           ║
+2026-02-20 00:59:43.099 [main] INFO  tr.akguel.CORBAMonitorAgent — ╚══════════════════════════════════════════════════╝
+2026-02-20 00:59:43.103 [main] INFO  tr.akguel.CORBAMonitorAgent — Configuration: MonitorConfig{api=http://127.0.0.1:8000/api, batch=50, flush=1000ms, capture_req=true, capture_res=true, ns=localhost:2809, scan=true/30s}
+2026-02-20 00:59:43.253 [main] WARN  tr.akguel.api.MonitorApiClient — SSL verification DISABLED — do NOT use in production
+2026-02-20 00:59:43.257 [main] INFO  tr.akguel.api.MonitorApiClient — MonitorApiClient started: MonitorConfig{api=http://127.0.0.1:8000/api, batch=50, flush=1000ms, capture_req=true, capture_res=true, ns=localhost:2809, scan=true/30s}
+2026-02-20 00:59:45.829 [main] INFO  tr.akguel.CORBAMonitorAgent — ✓ Monitor API Health is reachable at http://127.0.0.1:8000/api/health
+2026-02-20 00:59:57.016 [main] INFO  tr.akguel.CORBAMonitorAgent — Initializing ORB (nameserver=localhost:2809)
+2026-02-20 00:59:57.588 [main] INFO  t.a.i.MonitorORBInitializer — ╔══════════════════════════════════════════════════╗
+2026-02-20 00:59:57.589 [main] INFO  t.a.i.MonitorORBInitializer — ║       CORBA Monitor Interceptor Agent           ║
+2026-02-20 00:59:57.589 [main] INFO  t.a.i.MonitorORBInitializer — ╚══════════════════════════════════════════════════╝
+2026-02-20 00:59:57.626 [main] INFO  t.a.interceptor.ClientInterceptor — ClientInterceptor initialized (slot=0)
+2026-02-20 00:59:57.626 [main] INFO  t.a.i.MonitorORBInitializer — ✓ ClientRequestInterceptor registered
+2026-02-20 00:59:57.629 [main] INFO  t.a.interceptor.ServerInterceptor — ServerInterceptor initialized
+2026-02-20 00:59:57.629 [main] INFO  t.a.i.MonitorORBInitializer — ✓ ServerRequestInterceptor registered
+2026-02-20 00:59:57.630 [main] INFO  t.a.i.MonitorORBInitializer — CORBA Monitor interceptors active — forwarding traffic to API
+2026-02-20 00:59:58.879 [main] INFO  tr.akguel.CORBAMonitorAgent — ✓ ORB initialized
+2026-02-20 01:00:25.615 [main] INFO  t.a.nameserver.NameserverScanner — Trying corbaloc: corbaloc:iiop:localhost:2809/NameService
+2026-02-20 01:03:05.095 [main] ERROR t.a.nameserver.NameserverScanner — Failed to start nameserver scanner: Retries exceeded, couldn't reconnect to 127.0.0.1:2809
+2026-02-20 01:03:05.098 [main] INFO  tr.akguel.CORBAMonitorAgent — Agent running. Press Ctrl+C to stop.
+2026-02-20 01:03:05.121 [corba-monitor-shutdown] INFO  tr.akguel.CORBAMonitorAgent — Shutting down CORBA Monitor Agent...
+2026-02-20 01:03:05.123 [corba-monitor-shutdown] INFO  tr.akguel.api.MonitorApiClient — Shutting down MonitorApiClient...
+2026-02-20 01:03:05.123 [corba-monitor-shutdown] INFO  tr.akguel.api.MonitorApiClient — MonitorApiClient shutdown complete. Sent: 0, Failed: 0, Dropped: 0
+2026-02-20 01:03:05.123 [corba-monitor-shutdown] INFO  t.a.interceptor.ClientInterceptor — ClientInterceptor destroyed
+2026-02-20 01:03:05.123 [corba-monitor-shutdown] INFO  t.a.interceptor.ServerInterceptor — ServerInterceptor destroyed
+2026-02-20 01:03:05.123 [corba-monitor-shutdown] INFO  tr.akguel.CORBAMonitorAgent — Agent stopped. Stats: sent=0, failed=0, dropped=0
+2026-02-20 01:03:06.919 [main] INFO  tr.akguel.CORBAMonitorAgent — ╔══════════════════════════════════════════════════╗
+2026-02-20 01:03:06.920 [main] INFO  tr.akguel.CORBAMonitorAgent — ║       CORBA Monitor Agent v1.0.0                ║
+2026-02-20 01:03:06.920 [main] INFO  tr.akguel.CORBAMonitorAgent — ║       Standalone Mode                           ║
+2026-02-20 01:03:06.920 [main] INFO  tr.akguel.CORBAMonitorAgent — ╚══════════════════════════════════════════════════╝
+2026-02-20 01:03:06.923 [main] INFO  tr.akguel.CORBAMonitorAgent — Configuration: MonitorConfig{api=http://127.0.0.1:8000/api, batch=50, flush=1000ms, capture_req=true, capture_res=true, ns=localhost:2809, scan=true/30s}
+2026-02-20 01:03:07.073 [main] WARN  tr.akguel.api.MonitorApiClient — SSL verification DISABLED — do NOT use in production
+2026-02-20 01:03:07.077 [main] INFO  tr.akguel.api.MonitorApiClient — MonitorApiClient started: MonitorConfig{api=http://127.0.0.1:8000/api, batch=50, flush=1000ms, capture_req=true, capture_res=true, ns=localhost:2809, scan=true/30s}
+2026-02-20 01:03:09.785 [main] INFO  tr.akguel.CORBAMonitorAgent — ✓ Monitor API Health is reachable at http://127.0.0.1:8000/api/health
+2026-02-20 01:03:13.905 [main] INFO  tr.akguel.CORBAMonitorAgent — Initializing ORB (nameserver=localhost:2809)
+2026-02-20 01:03:13.936 [main] INFO  t.a.i.MonitorORBInitializer — ╔══════════════════════════════════════════════════╗
+2026-02-20 01:03:13.937 [main] INFO  t.a.i.MonitorORBInitializer — ║       CORBA Monitor Interceptor Agent           ║
+2026-02-20 01:03:13.937 [main] INFO  t.a.i.MonitorORBInitializer — ╚══════════════════════════════════════════════════╝
+2026-02-20 01:03:13.956 [main] INFO  t.a.interceptor.ClientInterceptor — ClientInterceptor initialized (slot=0)
+2026-02-20 01:03:13.957 [main] INFO  t.a.i.MonitorORBInitializer — ✓ ClientRequestInterceptor registered
+2026-02-20 01:03:13.958 [main] INFO  t.a.interceptor.ServerInterceptor — ServerInterceptor initialized
+2026-02-20 01:03:13.958 [main] INFO  t.a.i.MonitorORBInitializer — ✓ ServerRequestInterceptor registered
+2026-02-20 01:03:13.958 [main] INFO  t.a.i.MonitorORBInitializer — CORBA Monitor interceptors active — forwarding traffic to API
+2026-02-20 01:03:13.965 [main] INFO  tr.akguel.CORBAMonitorAgent — ✓ ORB initialized
+2026-02-20 01:04:23.100 [main] INFO  t.a.nameserver.NameserverScanner — Trying corbaloc: corbaloc:iiop:localhost:2809/NameService
+2026-02-20 01:04:46.915 [main] ERROR t.a.nameserver.NameserverScanner — Failed to start nameserver scanner: Retries exceeded, couldn't reconnect to 127.0.0.1:2809
+2026-02-20 01:04:56.019 [main] INFO  tr.akguel.CORBAMonitorAgent — Agent running. Press Ctrl+C to stop.
+2026-02-20 01:05:06.099 [corba-monitor-shutdown] INFO  tr.akguel.CORBAMonitorAgent — Shutting down CORBA Monitor Agent...
+2026-02-20 01:05:06.099 [corba-monitor-shutdown] INFO  tr.akguel.api.MonitorApiClient — Shutting down MonitorApiClient...
+2026-02-20 01:05:06.100 [corba-monitor-shutdown] INFO  tr.akguel.api.MonitorApiClient — MonitorApiClient shutdown complete. Sent: 0, Failed: 0, Dropped: 0
+2026-02-20 01:05:06.100 [corba-monitor-shutdown] INFO  t.a.interceptor.ClientInterceptor — ClientInterceptor destroyed
+2026-02-20 01:05:06.100 [corba-monitor-shutdown] INFO  t.a.interceptor.ServerInterceptor — ServerInterceptor destroyed
+2026-02-20 01:05:06.100 [corba-monitor-shutdown] INFO  tr.akguel.CORBAMonitorAgent — Agent stopped. Stats: sent=0, failed=0, dropped=0

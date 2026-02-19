@@ -14,7 +14,7 @@ import tr.akguel.api.MonitorApiClient
 import tr.akguel.api.TrafficEvent
 import tr.akguel.config.MonitorConfig
 import java.net.InetAddress
-import java.util.UUID
+import java.util.*
 import kotlin.math.min
 
 
@@ -52,12 +52,50 @@ class ClientInterceptor(private val slotId: Int) : LocalObject(), ClientRequestI
         return "CORBAMonitorClientInterceptor"
     }
 
+
+    /**
+     * Check if this request should be skipped (infrastructure call).
+     */
+    private fun shouldSkip(ri: ClientRequestInfo): Boolean {
+        try {
+            // Skip by operation name
+            val op = ri.operation()
+            if (op != null && SKIP_OPERATIONS.contains(op)) {
+                return true
+            }
+
+            // Skip by target interface (if available)
+            try {
+                val target = ri.target()
+                if (target != null) {
+                    val ids = (target as ObjectImpl)._ids()
+                    if (ids != null) {
+                        for (id in ids) {
+                            for (fragment in SKIP_INTERFACE_FRAGMENTS) {
+                                if (id.contains(fragment)) {
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch (ignored: java.lang.Exception) {
+                // Can't determine target — don't skip, but be safe in buildBaseEvent
+            }
+        } catch (ignored: java.lang.Exception) {
+        }
+
+        return false
+    }
+
     /**
      * Called before a request is sent to the server.
      * We record the start time and capture request parameters.
      */
     @Throws(ForwardRequest::class)
     override fun send_request(ri: ClientRequestInfo) {
+        if (shouldSkip(ri)) return
+
         try {
             // Store start time for latency calculation
             val startNanos = System.nanoTime()
@@ -85,6 +123,8 @@ class ClientInterceptor(private val slotId: Int) : LocalObject(), ClientRequestI
      * Called when a reply is received from the server.
      */
     override fun receive_reply(ri: ClientRequestInfo) {
+        if (shouldSkip(ri)) return
+
         try {
             val latency: Double? = calculateLatency(ri.request_id().toString().toByteArray(Charsets.UTF_8))
 
@@ -110,6 +150,8 @@ class ClientInterceptor(private val slotId: Int) : LocalObject(), ClientRequestI
      */
     @Throws(ForwardRequest::class)
     override fun receive_exception(ri: ClientRequestInfo) {
+        if (shouldSkip(ri)) return;
+
         try {
             val latency: Double? = calculateLatency(ri.request_id().toString().toByteArray(Charsets.UTF_8))
 
@@ -153,6 +195,8 @@ class ClientInterceptor(private val slotId: Int) : LocalObject(), ClientRequestI
      */
     @Throws(ForwardRequest::class)
     override fun receive_other(ri: ClientRequestInfo) {
+        if (shouldSkip(ri)) return
+
         try {
             val event: TrafficEvent = buildBaseEvent(ri, "receive_other")
                 .direction("reply")
@@ -420,5 +464,30 @@ class ClientInterceptor(private val slotId: Int) : LocalObject(), ClientRequestI
     companion object {
         private val log: Logger = LoggerFactory.getLogger(ClientInterceptor::class.java)
         private const val TIMESTAMP_SLOT_ID = 0
+
+        /**
+         * Operations and interfaces that should NOT be intercepted.
+         * These are CORBA infrastructure calls that would cause recursion or TRANSIENT errors
+         * if the interceptor tries to process them (especially during ORB/Naming bootstrap).
+         */
+        val SKIP_OPERATIONS: MutableSet<String> =
+            mutableSetOf<String>( // CORBA built-in operations (called during narrow, _is_a, etc.)
+                "_is_a", "_non_existent", "_get_interface_def", "_get_component",
+                "_get_domain_managers", "_get_policy", "_repository_id",  // COS Naming Service operations
+                "resolve", "resolve_str", "bind", "rebind", "unbind",
+                "bind_context", "rebind_context", "bind_new_context",
+                "list", "to_name", "to_string", "destroy",
+                "new_context", "to_url",  // ORB/POA internals
+                "resolve_initial_references"
+            )
+
+        val SKIP_INTERFACE_FRAGMENTS: MutableSet<String> = mutableSetOf<String>(
+            "CosNaming",  // CosNaming::NamingContext, NamingContextExt
+            "NamingContext",  // Any naming context interface
+            "PortableServer",  // POA internals
+            "IORTable",  // IOR table lookups
+            "CORBA/Repository",  // Interface repository
+            "InitialReferences" // ORB initial references
+        )
     }
 }

@@ -21,7 +21,7 @@ object Consumer {
             val nsPort: String? = if (args.size > 1) args[1] else "2809"
 
             println("╔══════════════════════════════════════════╗")
-            println("║   VehicleTracker — CORBA Consumer       ║")
+            println("║   VehicleTracker — CORBA Consumer        ║")
             println("╚══════════════════════════════════════════╝")
             println("Nameserver: " + nsHost + ":" + nsPort)
 
@@ -73,9 +73,13 @@ object Consumer {
             // ── Interactive mode ────────────────────────────
             println("\n══════════════════════════════════════════")
             println("  Interactive Mode")
-            println("  Commands: ping, count, list, get <id>,")
-            println("            update <id> <lat> <lon> <speed>,")
-            println("            loop <count>, quit")
+            println("  Commands: ping\n" +
+                    "            count\n" +
+                    "            list\n" +
+                    "            get <id>\n" +
+                    "            update <id> <lat> <lon> <speed>\n" +
+                    "            loop <count>\n" +
+                    "            quit")
             println("══════════════════════════════════════════\n")
 
             val scanner = Scanner(System.`in`)

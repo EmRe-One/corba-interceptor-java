@@ -129,7 +129,9 @@ class MonitorApiClient private constructor() {
             val payload: MutableMap<String?, Any?> = HashMap<String?, Any?>()
             payload["events"] = batch
             val json: String = gson.toJson(payload)
-            log.info("Sending batch to {}. Body: {}", config.batchEndpoint, json)
+            log.info("Sending batch to {}", config.batchEndpoint)
+            log.debug("Batch payload: {}", json)
+
             val status: Int = post(config.batchEndpoint, json)
 
             if (status in 200..<300) {
@@ -188,10 +190,10 @@ class MonitorApiClient private constructor() {
             conn.setRequestProperty("Content-Type", "application/json")
             conn.setRequestProperty("Accept", "application/json")
 
-            val token: String? = config.apiToken
-            if (!token.isNullOrEmpty()) {
-                conn.setRequestProperty("Authorization", "Bearer $token")
-            }
+            // val token: String? = config.apiToken
+            // if (!token.isNullOrEmpty()) {
+            //     conn.setRequestProperty("Authorization", "Bearer $token")
+            // }
 
             val bytes: ByteArray = json.toByteArray(StandardCharsets.UTF_8)
             conn.setFixedLengthStreamingMode(bytes.size)

@@ -13,11 +13,11 @@ if [ ! -f "$JAR" ]; then
 fi
 
 # Optional: Add monitor agent to classpath
-MONITOR_JAR="../corba-interceptor/target/corba-interceptor-1.0.0.jar"
+MONITOR_JAR="../agent/target/agent-1.0-SNAPSHOT.jar"
 MONITOR_OPTS=""
 if [ -f "$MONITOR_JAR" ]; then
     JAR="$JAR:$MONITOR_JAR"
-    MONITOR_OPTS="-Dorg.omg.PortableInterceptor.ORBInitializerClass.com.corbamonitor.interceptor.MonitorORBInitializer= -Dmonitor.api.url=http://localhost:8080/api -Dmonitor.ssl.trust-all=true"
+    MONITOR_OPTS="-Dorg.omg.PortableInterceptor.ORBInitializerClass.tr.akguel.interceptor.MonitorORBInitializer= -Dmonitor.api.url=https://corba-interceptor-web.test/api -Dmonitor.ssl.trust-all=true"
     echo "[+] CORBA Monitor agent detected — interceptors enabled"
 fi
 

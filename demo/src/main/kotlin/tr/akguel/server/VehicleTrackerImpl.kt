@@ -1,4 +1,4 @@
-package tr.akguel.tr.akguel.server
+package tr.akguel.server
 
 import FleetManagement.FleetManagement.GeoPosition
 import FleetManagement.FleetManagement.VehicleInfo

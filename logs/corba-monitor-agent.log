@@ -1,1 +1,22 @@
-2026-02-18 00:07:06.327 [main] WARN  tr.akguel.api.MonitorApiClient — SSL verification DISABLED — do NOT use in production
+2026-02-20 00:06:40.799 [main] INFO  tr.akguel.CORBAMonitorAgent — ╔══════════════════════════════════════════════════╗
+2026-02-20 00:06:40.804 [main] INFO  tr.akguel.CORBAMonitorAgent — ║       CORBA Monitor Agent v1.0.0                ║
+2026-02-20 00:06:40.804 [main] INFO  tr.akguel.CORBAMonitorAgent — ║       Standalone Mode                           ║
+2026-02-20 00:06:40.804 [main] INFO  tr.akguel.CORBAMonitorAgent — ╚══════════════════════════════════════════════════╝
+2026-02-20 00:06:40.810 [main] INFO  tr.akguel.CORBAMonitorAgent — Configuration: MonitorConfig{api=https://corba-interceptor-web.test/api, batch=50, flush=1000ms, capture_req=true, capture_res=true, ns=localhost:2809, scan=true/30s}
+2026-02-20 00:06:40.951 [main] WARN  tr.akguel.api.MonitorApiClient — SSL verification DISABLED — do NOT use in production
+2026-02-20 00:06:40.952 [main] INFO  tr.akguel.api.MonitorApiClient — MonitorApiClient started: MonitorConfig{api=https://corba-interceptor-web.test/api, batch=50, flush=1000ms, capture_req=true, capture_res=true, ns=localhost:2809, scan=true/30s}
+2026-02-20 00:06:43.445 [main] INFO  tr.akguel.CORBAMonitorAgent — ✓ Monitor API Health is reachable at https://corba-interceptor-web.test/api/health
+2026-02-20 00:06:43.445 [main] INFO  tr.akguel.CORBAMonitorAgent — Initializing ORB (nameserver=localhost:2809)
+2026-02-20 00:06:43.474 [main] INFO  t.a.i.MonitorORBInitializer — ╔══════════════════════════════════════════════════╗
+2026-02-20 00:06:43.475 [main] INFO  t.a.i.MonitorORBInitializer — ║       CORBA Monitor Interceptor Agent           ║
+2026-02-20 00:06:43.475 [main] INFO  t.a.i.MonitorORBInitializer — ╚══════════════════════════════════════════════════╝
+2026-02-20 00:06:43.478 [main] INFO  t.a.interceptor.ClientInterceptor — ClientInterceptor initialized (slot=0)
+2026-02-20 00:06:43.478 [main] INFO  t.a.i.MonitorORBInitializer — ✓ ClientRequestInterceptor registered
+2026-02-20 00:06:43.480 [main] INFO  t.a.interceptor.ServerInterceptor — ServerInterceptor initialized
+2026-02-20 00:06:43.481 [main] INFO  t.a.i.MonitorORBInitializer — ✓ ServerRequestInterceptor registered
+2026-02-20 00:06:43.481 [main] INFO  t.a.i.MonitorORBInitializer — CORBA Monitor interceptors active — forwarding traffic to API
+2026-02-20 00:06:43.487 [main] INFO  tr.akguel.CORBAMonitorAgent — ✓ ORB initialized
+2026-02-20 00:06:45.056 [main] INFO  t.a.nameserver.NameserverScanner — Trying corbaloc: corbaloc:iiop:localhost:2809/NameService
+2026-02-20 00:06:45.960 [corba-monitor-http] INFO  tr.akguel.api.MonitorApiClient — Sending batch to https://corba-interceptor-web.test/api/traffic/batch. Body: {"events":[{"request_id":"30","operation":"_is_a","interface_name":"Object","repository_id":"IDL:omg.org/CORBA/Object:1.0","direction":"reply","status":"timeout","source_host":"10.5.0.2","source_port":null,"target_host":null,"target_port":null,"source_service_name":null,"target_service_name":null,"request_data":null,"response_data":null,"error_message":"CORBA::TRANSIENT","exception_type":"SYSTEM_EXCEPTION","latency_ms":1532.2798,"giop_version":"1.2","message_type":"Reply","request_size_bytes":null,"response_size_bytes":null,"interceptor_point":"receive_exception","context_data":null,"timestamp":"2026-02-19T21:06:45.056916100Z"},{"request_id":"30","operation":"_is_a","interface_name":"Object","repository_id":"IDL:omg.org/CORBA/Object:1.0","direction":"request","status":"success","source_host":"10.5.0.2","source_port":null,"target_host":null,"target_port":null,"source_service_name":null,"target_service_name":null,"request_data":{"_note":"Could not extract arguments: Stream-based skeletons/stubs do not support this op"},"response_data":null,"error_message":null,"exception_type":null,"latency_ms":null,"giop_version":"1.2","message_type":"Request","request_size_bytes":null,"response_size_bytes":null,"interceptor_point":"send_request","context_data":null,"timestamp":"2026-02-19T21:06:45.057920800Z"}]}
+2026-02-20 00:06:46.590 [main] ERROR t.a.nameserver.NameserverScanner — Failed to start nameserver scanner: Retries exceeded, couldn't reconnect to 127.0.0.1:2809
+2026-02-20 00:06:46.591 [main] INFO  tr.akguel.CORBAMonitorAgent — Agent running. Press Ctrl+C to stop.

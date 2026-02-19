@@ -1,4 +1,4 @@
-package tr.akguel.tr.akguel.client
+package tr.akguel.client
 
 import FleetManagement.FleetManagement.*
 import org.omg.CORBA.ORB

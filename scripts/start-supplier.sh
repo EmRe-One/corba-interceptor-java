@@ -5,7 +5,7 @@
 
 NS_HOST=${1:-localhost}
 NS_PORT=${2:-2809}
-JAR="target/corba-demo-1.0.0.jar"
+JAR="../demo/target/demo-1.0-SNAPSHOT.jar"
 
 if [ ! -f "$JAR" ]; then
     echo "ERROR: $JAR not found. Run 'mvn clean package -DskipTests' first."

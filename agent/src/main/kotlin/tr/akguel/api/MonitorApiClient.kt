@@ -129,7 +129,7 @@ class MonitorApiClient private constructor() {
             val payload: MutableMap<String?, Any?> = HashMap<String?, Any?>()
             payload["events"] = batch
             val json: String = gson.toJson(payload)
-
+            log.info("Sending batch to {}. Body: {}", config.batchEndpoint, json)
             val status: Int = post(config.batchEndpoint, json)
 
             if (status in 200..<300) {

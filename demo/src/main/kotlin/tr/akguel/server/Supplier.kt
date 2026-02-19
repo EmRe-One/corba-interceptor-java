@@ -1,4 +1,4 @@
-package tr.akguel.tr.akguel.server
+package tr.akguel.server
 
 import FleetManagement.FleetManagement.VehicleTracker
 import FleetManagement.FleetManagement.VehicleTrackerHelper

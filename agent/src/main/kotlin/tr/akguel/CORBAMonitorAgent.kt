@@ -142,7 +142,7 @@ class CORBAMonitorAgent {
         } catch (ignored: Exception) {
         }
 
-        CORBAMonitorAgent.Companion.log.info(
+        log.info(
             "Agent stopped. Stats: sent={}, failed={}, dropped={}",
             apiClient.sentCount,
             apiClient.failedCount,
